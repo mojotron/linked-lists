@@ -38,12 +38,45 @@ class LinkedList
 
 	def size
 		count = 0
-		temp = @head
+		temp = @head # start at head
+
 		while temp != nil
 			count += 1
-			temp = temp.next_node
+			temp = temp.next_node # reasign temp with next node using @next_node variable
 		end
 		count
+	end
+
+	def head
+		@head	
+	end
+
+	def tail
+		@tail
+	end
+
+	def at(index) #returns the node at the given index (zero indexed)
+		return nil if index > self.size
+		count = 0
+		temp = @head
+
+		while true
+			return temp if count == index
+			temp = temp.next_node
+			count += 1
+		end
+	end
+
+	def pop
+	end
+
+	def contains?(value)
+	end
+
+	def find(value)
+	end
+
+	def to_s
 	end
 
 end
@@ -53,4 +86,11 @@ x.append('A')
 x.append('B')
 x.append('C')
 x.prepend('D')
-p x.size
+x.size
+#p x.head
+#p x.tail
+p x.at(0)
+p x.at(1)
+p x.at(2)
+p x.at(3)
+p x.at(35)
