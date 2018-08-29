@@ -162,46 +162,11 @@ class LinkedList
 
 end
 
-x = LinkedList.new
-x.append('A')
-x.prepend('Foo')
-x.append('B')
-x.prepend('Bar')
-x.append('C')
-x.to_s
-x.pop
-x.to_s
-x.pop
-x.to_s
-x.pop
-x.to_s
-x.pop
-x.to_s
-x.pop
-x.to_s
 
 
 
 
-=begin 
-def delete_at(index)
-		if index == 0
-			@head = @head.next_node
-		elsif index == self.size - 1
-			self.pop
-		else
-			temp = @head
-			i = 0
-			while true
-				if index == i + 1
-					temp.next_node = temp.next_node.next_node	
-					break
-				end
-				i += 1
-				temp = temp.next_node
-			end
-		end			
-	end
-=end
+
+
 
 
