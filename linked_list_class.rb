@@ -56,7 +56,7 @@ class LinkedList
 	end
 
 	def at(index) #returns the node at the given index (zero indexed)
-		return nil if index > self.size
+		return nil if index > self.size - 1
 		i = 0
 		temp = @head
 
@@ -65,6 +65,7 @@ class LinkedList
 			temp = temp.next_node
 			i += 1
 		end
+		nil
 	end
 
 	def contains?(value) # returns true if the passed in value is in the list and 
@@ -88,19 +89,40 @@ class LinkedList
 		nil
 	end
 
-	def to_s
+	def to_s #represent your LinkedList objects as strings
 		values = []
 		temp = @head
 		until temp == nil
-			temp_value = "( " + temp.value + " )"
-			values << temp_value
+			values << "( #{temp.value} )"
 			temp = temp.next_node
 		end
 		values << "nil"
 		puts values.join(' -> ')
 	end
 
-	def pop
+	def insert_at(index, value)
+		new_node = Node.new(value)
+		temp = @head
+		i = 1
+
+		if index == 0
+			self.prepend(value)
+		elsif index == self.size 
+			self.append(value)
+		else	
+			while true
+				if index == i
+					new_node.next_node = temp.next_node
+					temp.next_node = new_node
+					break
+				end
+				i += 1
+				temp = temp.next_node
+			end
+		end
+	end
+
+		def pop
 		if self.size > 1
 			x = self.size - 2
 			temp = self.at(x)
@@ -110,29 +132,59 @@ class LinkedList
 		end
 	end
 
-	def insert_at(index, value)
-		new_node = Node.new(value)
-		if index == 0
-			self.prepend(value)
-		elsif index == self.size 
-			self.append(value)
-		else
-			temp = @head
-			i = 1
-			while true
-				if index == i
-					new_node.next_node = temp.next_node
-					temp.next_node = new_node
-					#temp = new_node
-					break
-				end
-				i += 1
-				temp = temp.next_node
-			end
+	def delete_at(index)
+		return @head = @head.next_node if index == 0
+		
+		current = @head.next_node
+		prev = @head
+		i = 1
+		until current == nil
+			return prev.next_node = current.next_node if i == index 
+
+			current = current.next_node
+			prev = prev.next_node
+			i += 1
 		end
+		nil
 	end
 
-	def delete_at(index)
+	def reverse
+		current = @head
+		prev = nil
+		until current == nil
+			temp = current.next_node
+			current.next_node = prev
+			prev = current
+			current = temp
+		end
+		@head = prev
+	end
+
+end
+
+x = LinkedList.new
+x.append('A')
+x.prepend('Foo')
+x.append('B')
+x.prepend('Bar')
+x.append('C')
+x.to_s
+x.pop
+x.to_s
+x.pop
+x.to_s
+x.pop
+x.to_s
+x.pop
+x.to_s
+x.pop
+x.to_s
+
+
+
+
+=begin 
+def delete_at(index)
 		if index == 0
 			@head = @head.next_node
 		elsif index == self.size - 1
@@ -150,22 +202,6 @@ class LinkedList
 			end
 		end			
 	end
-
-	def reverse
-	end
-
-end
-
-x = LinkedList.new
-x.append('A')
-x.append('B')
-x.append('C')
-x.append('D')
-#x.prepend('D')
-#x.insert_at(0, 'Z')
-#x.insert_at(4, 'X')
-x.delete_at(0)
-x.to_s
-
+=end
 
 
